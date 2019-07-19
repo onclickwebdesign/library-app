@@ -153,6 +153,24 @@ app.get('/createandseedtables', async (req, res) => {
     res.send('Tables successfully created and seeded..');
 });
 
+// 404 route
+app.use((req, res, next) => {
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+// error handler
+app.use((err, req, res, next) => {
+    res.status(err.status).send(
+        `
+        <h1>${err.status}</h1>
+        <h2>Error: ${err.message}</h2>
+        <p>Stack: ${err.stack}</p>
+        `
+    );
+});
+
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
