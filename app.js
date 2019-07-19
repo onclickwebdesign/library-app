@@ -1,10 +1,22 @@
 const express = require('express');
+const hbs = require('express-handlebars');
 const pool = require('./db');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// setup handlebars template engine
+app.engine('hbs', hbs({
+    extname: 'hbs',
+    defaultLayout: 'main',
+    layoutsDir: './views/layouts/',
+    partialsDir: './views/includes/'
+}));
+
+app.set('view engine', 'hbs');
+
+
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.render('helloworld');
 });
 
 app.get('/createandseedtables', async (req, res) => {
