@@ -1,0 +1,62 @@
+<table id="books-table" class="table xs-hide table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th style="width:5%;" scope="col"></th>
+            <th style="width:25%;" scope="col">Author</th>
+            <th style="width:35%;" scope="col">Title</th>
+            <th style="width:10%;" scope="col">Type</th>
+            <th style="width:10%;" scope="col">Sub Type</th>
+            <th style="width:10%;" scope="col">Location</th>
+            <th style="width:5%;" scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#if book}}
+        <tr>
+            <th scope="row" class="text-center">
+                <a href="#" class="edit-book">
+                    <span class="fa fa-pencil"></span>
+                </a>
+            </th>
+            <td class="break-word">
+                <a href="#">{{book.author}}</a>
+            </td>
+            <td class="break-word">
+                <a href="#">{{book.title}} ({{book.language}})</a>
+            </td>
+            <td>{{book.type}}</td>
+            <td>{{book.sub_type}}</td>
+            <td>{{book.location}}</td>
+            <td class="text-center">
+                <a href="#" class="remove-book">
+                    <span class="fa fa-times"></span>
+                </a>
+            </td>
+        </tr>
+        {{/if}}
+    </tbody>
+</table>
+
+<container id="book-cards-list" class="sm-hide">
+    {{#if book}}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <p class="card-text">
+                <strong>Author:</strong> {{author}}<br/>
+                <strong>Type:</strong> {{type}}<br/>
+                <strong>Sub Type:</strong> {{sub_type}}<br/>
+                <strong>Language:</strong> {{language}}<br/>
+                <strong>Location:</strong> {{location}}<br/>
+            </p>
+            <a href="#" class="get-book-info btn btn-primary">Book details</a>
+            <a href="#" class="btn btn-secondary edit-book">
+                <span class="fa fa-pencil"></span>
+            </a>
+            <button class="btn btn-danger remove-book">
+                <span class="fa fa-times"></span>
+            </button>
+        </div>
+    </div>
+    {{/if}}
+</container>

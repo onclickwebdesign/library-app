@@ -4,6 +4,19 @@ const pool = require('./db');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// setup express routes
+const mainRoutes = require('./routes');
+const booksRoutes = require('./routes/books');
+const musicRoutes = require('./routes/music');
+const moviesRoutes = require('./routes/movies');
+const comicsRoutes = require('./routes/comics');
+
+app.use(mainRoutes);
+app.use('/books', booksRoutes);
+app.use('/music', musicRoutes);
+app.use('/movies', moviesRoutes);
+app.use('/comics', comicsRoutes);
+
 // serve static assets in /public directory as /static route
 app.use('/static', express.static('public'));
 
@@ -16,11 +29,6 @@ app.engine('hbs', hbs({
 }));
 
 app.set('view engine', 'hbs');
-
-
-app.get('/', (req, res) => {
-    res.render('helloworld');
-});
 
 // 404 route
 app.use((req, res, next) => {
