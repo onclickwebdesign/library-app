@@ -11,7 +11,8 @@
         </tr>
     </thead>
     <tbody>
-        {{#if book}}
+        {{#if books}}
+        {{#each books}}
         <tr>
             <th scope="row" class="text-center">
                 <a href="#" class="edit-book">
@@ -19,26 +20,28 @@
                 </a>
             </th>
             <td class="break-word">
-                <a href="#">{{book.author}}</a>
+                <a href="#">{{author}}</a>
             </td>
             <td class="break-word">
-                <a href="#">{{book.title}} ({{book.language}})</a>
+                <a href="#">{{title}} ({{language}})</a>
             </td>
-            <td>{{book.type}}</td>
-            <td>{{book.sub_type}}</td>
-            <td>{{book.location}}</td>
+            <td>{{type}}</td>
+            <td>{{sub_type}}</td>
+            <td>{{location}}</td>
             <td class="text-center">
                 <a href="#" class="remove-book">
                     <span class="fa fa-times"></span>
                 </a>
             </td>
         </tr>
+        {{/each}}
         {{/if}}
     </tbody>
 </table>
 
 <container id="book-cards-list" class="sm-hide">
-    {{#if book}}
+    {{#if books}}
+    {{#each books}}
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">{{title}}</h5>
@@ -58,5 +61,6 @@
             </button>
         </div>
     </div>
+    {{/each}}
     {{/if}}
 </container>
