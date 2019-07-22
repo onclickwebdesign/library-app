@@ -26,14 +26,40 @@ router.get('/', async (req, res) => {
     let err;
     const books = await pool.query(sql).catch(e => err = e);
     if (err) {
+        console.error('Sql error: ', err);
         res.render('books', { books: [], errorMsg: 'There was an error retrieving your books, please reload this page.' });
+    } else {
+        res.render('books', { books });
     }
-    res.render('books', { books });
 });
 
 // Search books by query parameter string
-router.get('/searchbooks', (req, res) => {
-    res.render('books');
+router.get('/searchbooks', async (req, res) => {
+    const s = req.query.booksearch; // explain why .trim() is needed here
+    console.log('booksearch term is: ', s);
+
+    const sql = 
+        `
+        ${retrieveBooksSql}
+        WHERE
+            book.author LIKE '%${s}%' OR 
+            book.title LIKE '%${s}%' OR 
+            book_type.type LIKE '%${s}%' OR 
+            book_sub_type.sub_type LIKE '%${s}%' OR
+            book_language.language LIKE '%${s}%' OR
+            book_location.location LIKE '%${s}%'
+        ORDER BY book_type.type, book_sub_type.sub_type, book.author;
+        `;
+
+    let err;
+    const books = await pool.query(sql).catch(e => err = e);
+    
+    if (err) {
+        console.error('Sql error: ', err);
+        res.render('books', { books: [], errorMsg: 'There was an error with that search, please try again.' });
+    } else {
+        res.render('books', { books });
+    }
 });
 
 // Get book info (Google Books API)
@@ -43,12 +69,57 @@ router.get('/getbookinfo', async (req, res) => {
 });
 
 // Insert book get and post
-router.get('/addbook', (req, res) => {
-    res.send('In /addbook route...');
+router.get('/addbook', async (req, res) => {
+    const sql = 
+        `
+        SELECT * FROM book_type;
+        SELECT * FROM book_sub_type;
+        SELECT * FROM book_language;
+        SELECT * FROM book_location;
+        `;
+
+        let err;
+        const results = await pool.query(sql).catch(e => err = e);
+        
+        if (err) {
+            console.error('Sql error: ', err);
+            res.render('books', { books: [], errorMsg: 'There was an error, please try that action again.' });
+        } else {
+            const templateData = {
+                types: results[0],
+                sub_types: results[1],
+                languages: results[2],
+                locations: results[3]
+            };
+            res.render('addbook', templateData);
+        }
 });
 
-router.post('/insertbook', (req, res) => {
-    res.send('In /insertbook route...');
+router.post('/insertbook', async (req, res) => {
+    // const bookTypeId = +req.body.type;
+    // const bookSubTypeId = +req.body.sub_type;
+    // const bookLanguageId = +req.body.language;
+    // const bookLocationId = +req.body.location;
+    
+    const book = { 
+        author: req.body.author, 
+        title: req.body.title, 
+        book_type_id: req.body.type, 
+        book_sub_type_id: req.body.sub_type, 
+        book_language_id: req.body.language,
+        book_location_id: req.body.location 
+    };
+
+    let err;
+    const sql = 'INSERT INTO book SET ?';
+
+    const result = await pool.query(sql, book).catch(e => err = e);
+    if (err) {
+        console.log('SQL Error: ', err);
+        res.redirect('/books/addbook?s=0');
+    } else {
+        res.redirect('/books/addbook?s=1');
+    }
 });
 
 // Update book GET and PUT (by id)

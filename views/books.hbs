@@ -1,3 +1,11 @@
+<div class="search-form-container margin-bottom">
+    <form action="/books/searchbooks" method="GET" class="margin-bottom">
+        <input class="form-control" type="text" name="booksearch" id="book-search" placeholder="Search Author, Title, Type, or Location" />
+        <button id="search-books-submit" class="btn btn-primary" type="submit"><span class="fa fa-search"></span></button>
+    </form>
+    <a href="/books/addbook" class="btn btn-success top-float-button" title="Add a new book to your library">Add a book to your library <span class="fa fa-plus"></span></a>
+</div>
+
 <table id="books-table" class="table xs-hide table-bordered table-hover table-sm">
     <thead>
         <tr>
@@ -20,10 +28,10 @@
                 </a>
             </th>
             <td class="break-word">
-                <a href="#">{{author}}</a>
+                <a href="#" class="dark-link">{{author}}</a>
             </td>
             <td class="break-word">
-                <a href="#">{{title}} ({{language}})</a>
+                <a href="#" class="dark-link">{{title}} ({{language}})</a>
             </td>
             <td>{{type}}</td>
             <td>{{sub_type}}</td>

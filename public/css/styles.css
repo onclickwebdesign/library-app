@@ -4,9 +4,17 @@
     border-radius: 0;
 }
 
+h3 {
+    margin: 1rem 0;
+}
+
 .flex {
     display: flex;
     justify-content: space-between;
+}
+
+.margin-bottom {
+    margin-bottom: 2rem;
 }
 
 header {
@@ -44,6 +52,33 @@ header h1 a:hover {
     width: 100%;
 }
 
+.search-form-container form {
+    position: relative;
+}
+
+#search-books-submit {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+table td.break-word, table td.break-word * {
+    word-break: break-word;
+}
+
+table th.text-center, table td.text-center {
+    text-align: center;
+}
+
+.remove-book {
+    color: #dc3545;
+    font-size: 20px;
+}
+
+.dark-link {
+    color: #212529;
+}
+
 .sm-hide {
     display: none;
 }
@@ -61,7 +96,49 @@ header h1 a:hover {
         display: none;
     }
 
+    .top-float-button {
+        display: block;
+        position: absolute;
+        top: 10px;
+        width: 90%;
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+    }
+
     #collections .btn {
         font-size: 2rem;
+    }
+
+    .card {
+        margin-top: 1rem;
+    }
+
+    .card:first-child {
+        margin-top: 0;
+    }
+
+    .card-title {
+        width: 80%;
+    }
+
+    .card-body {
+        position: relative;
+    }
+
+    .card-body .edit-book {
+        position: absolute;
+        right: 1.25rem;
+        top: 1.25rem;
+    }
+
+    .card-body .remove-book {
+        position: absolute;
+        right: 1.25rem;
+        bottom: 1.25rem;
+    }
+
+    .remove-book {
+        color: #fff;
     }
 }
