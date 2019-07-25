@@ -51,16 +51,15 @@ router.get('/', async (req, res) => {
 
 // Search books by query parameter string
 router.get('/searchbooks', async (req, res) => {
-    const s = req.query.booksearch; // explain why .trim() is needed here
+    const s = pool.escape(`%${req.query.booksearch.trim()}%`);
     
     const sql = 
         `${retrieveBooksSql}
         WHERE
-            book.author LIKE '%${s}%' OR book.title LIKE '%${s}%' OR book_type.type LIKE '%${s}%' OR book_sub_type.sub_type LIKE '%${s}%' OR book_language.language LIKE '%${s}%' OR book_location.location LIKE '%${s}%' ORDER BY book_type.type, book_sub_type.sub_type, book.author; -- SQL query for searchbooks`;
+            book.author LIKE ${s} OR book.title LIKE ${s} OR book_type.type LIKE ${s} OR book_sub_type.sub_type LIKE ${s} OR book_language.language LIKE ${s} OR book_location.location LIKE ${s} ORDER BY book_type.type, book_sub_type.sub_type, book.author`;
 
     let err;
     let booksResult = await pool.query(sql).catch(e => err = e);
-    console.log(booksResult);
     let books = getJson(booksResult);
     
     if (err) {
@@ -111,8 +110,8 @@ router.post('/insertbook', async (req, res) => {
     // const bookLocationId = +req.body.location;
     
     const book = { 
-        author: req.body.author, 
-        title: req.body.title, 
+        author: req.body.author.trim(), 
+        title: req.body.title.trim(), 
         book_type_id: req.body.type, 
         book_sub_type_id: req.body.sub_type, 
         book_language_id: req.body.language,
