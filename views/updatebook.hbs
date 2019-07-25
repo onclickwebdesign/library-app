@@ -1,0 +1,64 @@
+<div class="container">
+    <a href="/books" class="btn btn-success top-float-button" title="Back to book search">
+        <span class="fa fa-arrow-left"></span> 
+        Back to search
+    </a>
+    <h3>Update the information for <em>{{book.title}}</em> below:</h3>
+    <form action="/books/updatebookbyid/{{book.id}}" method="POST">
+        <div class="form-group">
+            <label class="sr-only" for="author">Author</label>
+            <input class="form-control" value="{{book.author}}" type="text" id="author" name="author" placeholder="Author" />
+        </div>
+
+        <div class="form-group">
+            <label class="sr-only" for="title">Title</label>
+            <input class="form-control" value="{{book.title}}" type="text" id="title" name="title" placeholder="Title" />
+        </div>
+
+        <div class="form-group">
+            <label class="sr-only" for="type">Type</label>
+            <select id="type" name="type" class="form-control">
+                {{#if types}}
+                {{#each types}}
+                    <option {{#if_equal id ../book.book_type_id}} selected {{/if_equal}} value="{{id}}">{{type}}</option>
+                {{/each}}
+                {{/if}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="sr-only" for="sub_type">Sub Type</label>
+            <select id="sub_type" name="sub_type" class="form-control">
+                {{#if sub_types}}
+                {{#each sub_types}}
+                <option {{#if_equal id ../book.book_sub_type_id}} selected {{/if_equal}} value="{{id}}">{{sub_type}}</option>
+                {{/each}}
+                {{/if}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="sr-only" for="language">Language</label>
+            <select id="language" name="language" class="form-control">
+                {{#if languages}}
+                {{#each languages}}
+                <option {{#if_equal id ../book.book_language_id}} selected {{/if_equal}} value="{{id}}">{{language}}</option>
+                {{/each}}
+                {{/if}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="sr-only" for="location">Location</label>
+            <select id="location" name="location" class="form-control">
+                {{#if locations}}
+                {{#each locations}}
+                <option {{#if_equal id ../book.book_location_id}} selected {{/if_equal}} value="{{id}}">{{location}}</option>
+                {{/each}}
+                {{/if}}
+            </select>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Update book</button>
+    </form>
+</div>

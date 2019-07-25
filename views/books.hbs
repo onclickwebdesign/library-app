@@ -23,7 +23,7 @@
         {{#each books}}
         <tr>
             <th scope="row" class="text-center">
-                <a href="#" class="edit-book">
+                <a href="/books/updatebook?id={{id}}" class="edit-book">
                     <span class="fa fa-pencil"></span>
                 </a>
             </th>
@@ -37,7 +37,7 @@
             <td>{{sub_type}}</td>
             <td>{{location}}</td>
             <td class="text-center">
-                <a href="#" class="remove-book">
+                <a href="#" class="remove-book" data-bookid="{{id}}" data-toggle="modal" data-target="#removeBookModal">
                     <span class="fa fa-times"></span>
                 </a>
             </td>
@@ -61,10 +61,10 @@
                 <strong>Location:</strong> {{location}}<br/>
             </p>
             <a href="#" class="get-book-info btn btn-primary">Book details</a>
-            <a href="#" class="btn btn-secondary edit-book">
+            <a href="/books/updatebook?id={{id}}" class="btn btn-secondary edit-book">
                 <span class="fa fa-pencil"></span>
             </a>
-            <button class="btn btn-danger remove-book">
+            <button class="btn btn-danger remove-book" data-bookid="{{id}}" data-toggle="modal" data-target="#removeBookModal">
                 <span class="fa fa-times"></span>
             </button>
         </div>
@@ -72,3 +72,25 @@
     {{/each}}
     {{/if}}
 </container>
+
+<!-- Start: Confirm Remove Book Modal -->
+<div class="modal fade" id="removeBookModal" tabindex="-1" role="dialog" aria-labelledby="removeBookModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="removeBookModalLabel">Delete Book</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you would like to permanently remove this book from your library?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button id="removeBookConfirm" type="button" class="btn btn-primary">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End: Confirm Remove Book Modal -->
