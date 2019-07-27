@@ -61,4 +61,13 @@
         
         <button type="submit" class="btn btn-primary">Update book</button>
     </form>
+
+    {{#if messageType}}
+    <div class="alert alert-{{messageType}}" role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {{/if}}
 </div>

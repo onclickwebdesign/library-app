@@ -9,11 +9,15 @@
     <link href="/static/dist/library.bundle.css" type="text/css" rel="Stylesheet" />
 </head>
 <body>
+    <div id="loadingSpinner">
+        <span class="fa fa-spinner fa-spin"></span>
+    </div>
     <section id="app">
-        {{> header }}
+        {{> header}}
         <div class="jumbotron">
             {{{body}}}
         </div>
+        {{> footer}}
     </section>
 
     <script src="https://kit.fontawesome.com/95dc93da07.js"></script>

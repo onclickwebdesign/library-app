@@ -4,6 +4,21 @@
     border-radius: 0;
 }
 
+html {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    padding-bottom: 210px;
+    min-height: 100%;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
 h3 {
     margin: 1rem 0;
 }
@@ -39,6 +54,11 @@ header h1 a:hover {
     width: 100%;
 }
 
+.jumbotron {
+    margin: 0;
+    background: #fff;
+}
+
 #collections > div {
     margin-top: 2rem;
 }
@@ -52,14 +72,41 @@ header h1 a:hover {
     width: 100%;
 }
 
+.search-form-container {
+    height: 108px;
+}
+
 .search-form-container form {
     position: relative;
+}
+
+.search-form-container form.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5;
+    box-shadow: 0px 0px 35px -2px #777
+}
+
+.search-form-container form input.form-control {
+    border-radius: 0;
+}
+
+.search-form-container form.sticky input.form-control {
+    padding: 0.25rem 0 0.25rem 0.75rem;
+    height: 45px;
 }
 
 #search-books-submit {
     position: absolute;
     right: 0;
     top: 0;
+}
+
+.search-form-container form.sticky #search-books-submit {
+    height: 45px;
+    width: 50px;
 }
 
 table td.break-word, table td.break-word * {
@@ -83,10 +130,102 @@ table th.text-center, table td.text-center {
     display: none;
 }
 
+/* new stuff..... */
+#bookDetailsModal .flex {
+    justify-content: space-around;
+    margin-bottom: 1rem;
+}
+
+#bookDetailsModal .flex img {
+    width: 128px;
+    margin-right: 10px;
+}
+
+#loadingSpinner {
+    position: fixed;
+    z-index: 3;
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#loadingSpinner.show {
+    display: block;
+}
+
+#loadingSpinner .fa {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: -25px auto 0;
+    color: #fff;
+    display: block;
+    width: 65px;
+    font-size: 65px;
+}
+
+.alert {
+    position: fixed;
+    top: 10px;
+    left: 0;
+    right: 0;
+    width: 90%;
+    margin: 0 auto;
+    z-index: 3;
+    box-shadow: 0px 1px 10px 0px #aaa
+}
+
+footer {
+    padding: 4rem 0 2rem;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    z-index: 4;
+}
+
+footer ul {
+    margin-bottom: 3rem;
+    font-size: 1.75rem;
+}
+
+footer ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+footer ul li a {
+    color: #fff;
+}
+
+footer small img {
+    width: 23px;
+    background: #fff;
+    border-radius: 20px;
+}
+/* end new stuff.... */
+
 @media (max-width: 650px) {
     h1 {
         font-size: 2rem;
     }
+
+    /* start new stuff... */
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+    /* end new stuff... */
 
     .sm-hide {
         display: block;
@@ -128,4 +267,21 @@ table th.text-center, table td.text-center {
         bottom: 1.25rem;
         color: #fff;
     }
+
+    /* new stuff .... */
+    #bookDetailsModal .flex {
+        justify-content: space-between;
+        align-items: start;
+    }
+    
+    #bookDetailsModal .flex img {
+        max-width: 128px;
+        width: 50%;
+        min-width: 110px;
+    }
+
+    #bookDetailsModal .book-details-container {
+        font-size: 0.85rem;
+    }
+    /* end new stuff ..... */
 }

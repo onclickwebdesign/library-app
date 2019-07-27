@@ -39,20 +39,15 @@ app.set('view engine', 'hbs');
 
 // 404 route
 app.use((req, res, next) => {
-    const err = new Error('Not Found');
+    const err = new Error(`The requested URL ${req.originalUrl} was not found on this server.  That's all we know.`);
     err.status = 404;
     next(err);
 });
 
 // error handler
 app.use((err, req, res, next) => {
-    res.status(err.status || 500).send(
-        `
-        <h1>${err.status || 500}</h1>
-        <h2>Error: ${err.message}</h2>
-        <p>Stack: ${err.stack}</p>
-        `
-    );
+    err.status = err.status || 500;
+    res.status(err.status).render('error', { err });
 });
 
 app.listen(PORT, () => {
