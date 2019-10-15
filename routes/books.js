@@ -41,14 +41,17 @@ router.get('/', async (req, res) => {
     const sql = `${retrieveBooksSql} LIMIT 30;`;
     
     let err;
+    const count = await pool.query('SELECT COUNT(id) FROM book;');
     const books = await pool.query(sql).catch(e => err = e);
+
+    console.log('count: ', count[0], count['COUNT(id)'], count[0]['COUNT(id)']);
     if (err) {
-        let message = 'There was an error retrieving your books, please reload this page.';
-        let messageType = 'danger';
+        const message = 'There was an error retrieving your books, please reload this page.';
+        const messageType = 'danger';
         console.error('Sql error: ', err);
         res.render('books', { message, messageType });
     } else {
-        res.render('books', { books });
+        res.render('books', { books, count: count[0]['COUNT(id)'] });
     }
 });
 

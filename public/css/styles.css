@@ -57,6 +57,11 @@ header h1 a:hover {
 .jumbotron {
     margin: 0;
     background: #fff;
+    padding-top: 1rem;
+}
+
+#library-stats {
+    margin: 1rem 0;
 }
 
 #collections > div {
