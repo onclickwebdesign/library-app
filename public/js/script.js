@@ -115,3 +115,18 @@ $('#book-cards-list').on('click', '.remove-book', e => {
 $('#removeBookConfirm').on('click', e => {
     removeBook(e.currentTarget);
 });
+
+const $byTypeCount = $('#books-by-type-count');
+$('#type-count').on('change', async function () {
+    const id = $(this).val();
+    console.log('id is: ', id);
+    const result = await fetch(`/books/booksbytype/${id}`, {
+        'headers': {
+            'Response-Type': 'application/json'
+        }
+    });
+    const count = await result.json();
+
+    console.log('count is: ', count);
+    $byTypeCount.text(count.count);
+});
